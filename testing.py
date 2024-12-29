@@ -115,6 +115,12 @@ def get_weaknesses_from_summary(chunks, summary):
 # Tool to get summary, strengths, and weaknesses from a CV
 @tool
 def getSummaryStrengthsWeaknessesFromCV(url: str) -> dict:
+    """Extracts the summary, strengths and weaknesses from a CV and output it in a dict in a json like format {"summary":"summary here", "strengths:"strengths here","weaknesses":"weaknesses here"}.
+    Args:
+      url (str): The URL of the CV to analyze.
+    Returns:
+      dict: A dictionary containing the summary, strengths and weaknesses in a json like format.
+    """
     pdf_path = download_pdf_from_url(url)
     chunks = pdf_to_chunks(pdf_path)
     summary = get_summary(chunks)
@@ -125,6 +131,12 @@ def getSummaryStrengthsWeaknessesFromCV(url: str) -> dict:
 # Tool to predict Big 5 personality, MBTI, and professional responsibility scores from a video
 @tool
 def predictBig5PersonalityMBTIandProfessionalResponsibilityFromVideo(url: str) -> dict:
+    """Predicts the values for Big 5 personality types, MBTI and Professional Responsibility scores for different professions from a video. outputs it in a dict in a json like format {"Big5":{"Openness":0.5, "Conscientiousness":0.5,"Extraversion":0.5,"Agreeableness":0.5,"Non-Neuroticism":0.5},"MBTI":{"type":"INFJ","score":41,0},"ProfessionalResponsibilitiesScores":{"Managers/executives":50,"Entrepreneurship":40,"Public sector professions":60,"Social/Non profit making professions":30, "Scientists/researchers, and engineers":70}}.
+    Args:
+      url (str): The URL of the video to analyze.
+    Returns:
+      dict: A dictionary in a json like format {"Big5":{"Openness":0.5, "Conscientiousness":0.5,"Extraversion":0.5,"Agreeableness":0.5,"Non-Neuroticism":0.5},"MBTI":{"type":"INFJ","score":41,0},"ProfessionalResponsibilitiesScores":{"Managers/executives":50,"Entrepreneurship":40,"Public sector professions":60,"Social/Non profit making professions":30, "Scientists/researchers, and engineers":70}}.
+    """
     output = {}
     client = Client("vizorous16/OCEANAI", verbose=True)
     videoPredict = client.predict(
